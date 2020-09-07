@@ -18,11 +18,10 @@ app.use(bodyParser.json());
 routes(app);
 
 app.route("/").get((req, res) => {
-  res.send("Acessou a API da To Do List!");
+  res.send("Accessed the To Do List API!");
 });
 
 const port = process.env.PORT || 3000;
 
 app.listen(port);
-
-console.log("Aplicacão Iniciada na porta", port);
+console.log("Application Started at the door", port);
