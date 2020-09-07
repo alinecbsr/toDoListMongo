@@ -1,25 +1,18 @@
-exports.listAll = (req, res) => {
-  let users = [
-    {
-      nome: "teste 01",
-      email: "test@123.com",
-    },
-    {
-      nome: "teste 01",
-      email: "test2t@123.com",
-    },
-    {
-      nome: "teste 01",
-      email: "test3@123.com",
-    },
-  ];
+const mongoose = require("mongoose");
+const Users = mongoose.model('Users');
+
+exports.listAll = async (req, res) => {
+  users = await Users.find();
   res.send(users);
 };
 
-exports.createOne = (req, res) => {
-  let response = {
-    message: "Usuário cadastrado com sucesso",
-    data: req.body,
-  };
-  res.status(201).json(response);
+exports.createOne = async (req, res) => {
+  try {
+    newUser = req.body;
+    ret = await Users.create(newUser);
+  } catch (error) {
+    res.status(400).json(error);
+    return;
+  }
+  res.status(201).json(ret);
 };
